@@ -37,7 +37,12 @@
 		$menu['Cari Lowongan'] = "front/lowongan"; 
 		if($this->session->userdata('login')){
 			$menu['Profil'] = "front/profil";
-			$menu['Resume'] = "front/resume";
+			if($this->session->userdata('role')=='pelamar'){
+				$menu['Resume'] = "front/resume";
+			}
+			if($this->session->userdata('role')=='employer'){
+				$menu['Buat Lowongan'] = "front/formLowongan";
+			}
 		}
 		foreach($menu as $menu => $halaman){
 			echo "<li><a href='$halaman'>$menu</a></li>";

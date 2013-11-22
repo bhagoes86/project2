@@ -56,7 +56,7 @@ class front extends CI_Controller {
 	}
 	//Untuk Employer
 	public function employer(){
-		if($this->session->userdata('role')=='pelamar'){
+		if($this->session->userdata('role')=='employer'){
 			$this->model_front->resume();
 			$data['content'] = "front/employer";
 			$this->load->view('main',$data);

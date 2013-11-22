@@ -137,7 +137,7 @@
 						if($this->session->userdata('role')=='admin'){
 						redirect('job/userPelamar');
 						}elseif($this->session->userdata('role')=='employer'){
-							redirect('employer');
+							redirect('front/employer');
 						}else{
 							redirect('front/lowongan');
 						}
