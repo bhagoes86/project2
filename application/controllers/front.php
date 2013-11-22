@@ -76,6 +76,11 @@ class front extends CI_Controller {
 		$data['content'] = "front/contact";
 		$this->load->view('main',$data);
 	}
+	public function register(){
+		$this->model_front->login();
+		$data['content'] = "front/register";
+		$this->load->view('main',$data);
+	}
 	public function login()
 	{
 		$this->session->set_userdata('title',"Login");
