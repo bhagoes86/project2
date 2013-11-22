@@ -80,7 +80,7 @@
 	$row = $this->model_front->profil('employer');
 ?>
 	
-	<form method="post" class="form-horizontal">
+	<form method="post" class="form-horizontal" enctype='multipart/form-data'>
 		<div class="page-header">
 		  <h4>My Profil</h4>
 		</div>
@@ -114,9 +114,30 @@
 	  </div>
 	</div>
 	<div class="control-group">
+	  <label class="control-label">Tentang Perusahaan</label>
+	  <div class="controls">
+		<input type="text" name="perusahaan" value="<?php echo $row->perusahaan;?>" placeholder="Perusahaan">
+		<?php echo form_error('perusahaan');?>
+	  </div>
+	</div>
+	<div class="control-group">
+	  <label class="control-label">Nama Perusahaan</label>
+	  <div class="controls">
+		<textarea name="about" placeholder="Perusahaan"><?php echo $row->about;?></textarea>
+		<?php echo form_error('about');?>
+	  </div>
+	</div>
+	<div class="control-group">
 	  <label class="control-label">Gambar Logo</label>
 	  <div class="controls">
 		<img src='assets/logo/<?php echo $row->logo?>' class='logo' />
+	  </div>
+	</div>
+	<div class="control-group">
+	  <label class="control-label">Upload Logo</label>
+	  <div class="controls">
+		<input type='hidden' name='dlogo' value='<?php echo $row->logo;?>' />
+		<input type='file' title='Upload Logo' name='logo' />
 	  </div>
 	</div>
 	<div class="control-group">

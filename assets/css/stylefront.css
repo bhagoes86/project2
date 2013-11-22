@@ -42,6 +42,9 @@
 .list-lowongan .logo{
 	height:50px;
 }
+textarea{
+	min-height:80px;
+}
 /*Helper*/
 .login .nf{
 	margin:10px 0px !important;

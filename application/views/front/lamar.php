@@ -19,7 +19,6 @@
 		</blockquote>
 		
 		<br>
-		
 		<h3>Tentang Lowongan</h3>
 		<blockquote>
 			<dl class="dl-horizontal">

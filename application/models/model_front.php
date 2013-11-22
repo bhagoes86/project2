@@ -75,7 +75,43 @@
 					$this->session->unset_userdata('validation');
 			}
 		}
-		//Edit Profil pelamar{
+		//Edit Profil employer
+		function profil_employer(){
+			if($this->input->post('edit')){
+				//$this->form_validation->set_rules('user','Username','required');
+				$this->form_validation->set_rules('email','Email','required|valid_email');
+				$this->form_validation->set_rules('fname','Nama Lengkap','required');
+				$this->form_validation->set_rules('perusahaan','Perusahaan','required');
+				$this->form_validation->set_rules('about','about','required');
+				if(!$this->form_validation->run()==false){
+					$data = array(
+						'username'=>$this->input->post('user'),
+						'email'=>$this->input->post('email'),
+						'fname'=>$this->input->post('fname'),
+						'perusahaan'=>$this->input->post('perusahaan'),
+						'about'=>$this->input->post('about'),
+						'id_kota'=>$this->input->post('kota'),
+						'alamat'=>$this->input->post('alamat'),
+						'telp'=>$this->input->post('telp')
+					);
+					//Jika upload Gambar
+					if($_FILES['logo']['name']){
+						unlink('assets/logo/'.$this->input->post('dlogo'));
+						$dir = "assets/logo/";
+						$name = time()."_".$_FILES['logo']['name'];
+						move_uploaded_file($_FILES['logo']['tmp_name'],$dir.$name);
+						$data['logo'] = $name;
+					}
+					if($this->input->post('pass')){
+						$data['password'] = md5($this->input->post('pass'));
+					}
+					$this->db->where('id_user',$this->session->userdata('id_user'));
+					$this->db->update('user',$data);
+					$this->session->set_userdata('msg','Ubah profil berhasil');
+				}
+			}
+		}
+		//Edit Profil pelamar
 		function profil_pelamar(){
 			if($this->input->post('edit')){
 				//$this->form_validation->set_rules('user','Username','required');
