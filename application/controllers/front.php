@@ -34,7 +34,7 @@ class front extends CI_Controller {
 	public function profil(){
 		if($this->session->userdata('login')){
 			if($this->session->userdata('role')=='employer'){
-				
+				$this->model_front->profil_employer();
 			}else{
 				$this->model_front->profil_pelamar();
 			}
