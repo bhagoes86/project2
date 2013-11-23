@@ -1,5 +1,5 @@
 <div class="span3 bs-docs-sidebar">
-	<form action='<?php echo base_url();?>front/lowongan' >
+	<form method='post' action='<?php echo base_url();?>front/lowongan' >
 		<h4>Cari Lowongan :</h4>
 		<div class="control-group">
 		  <label class="control-label" for="inputProvinsi">Provinsi</label>
@@ -27,7 +27,7 @@
 			<input class='span12' name='src' type="text" id="inputsrc" placeholder="Cari Lowongan">
 		  </div>
 		  <div class="controls">
-			<input type="submit" name='search' value='Search' class="btn span12">
+			<input type="submit" name='search' value='Search' class="btn span12" />
 		  </div>
 		</div>
 	</form>
@@ -41,6 +41,7 @@
 				$menu['Resume'] = "front/resume";
 			}
 			if($this->session->userdata('role')=='employer'){
+				$menu['Pelamar'] = "front/employer";
 				$menu['Buat Lowongan'] = "front/formLowongan";
 			}
 		}

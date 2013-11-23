@@ -5,7 +5,7 @@
 		function sel_attributte($type){
 			$query = $this->db->get_where('attributte',array('type'=>$type))->result();
 			foreach($query as $row){
-				$tampil[$row->id_attribute] = $row->value;
+				$tampil[$row->value] = $row->value;
 			}
 			return $tampil;
 		}
@@ -16,6 +16,12 @@
 			}
 			$this->db->join('attributte','attributte.id_attribute = lowongan.id_keahlian');
 			$this->db->join('user','user.id_user = lowongan.id_employer');
+			//Search
+			if($this->input->post('search')){
+				$this->db->like(array('lowongan'=>$this->input->post('src'),
+					'value'=>$this->input->post('keahlian'),
+					'provinsi'=>$this->input->post('provinsi')));
+			}
 			$result['data'] = $this->db->get('lowongan')->result();
 			$result['count'] = $this->db->count_all_results('lowongan');
 			return $result;
@@ -135,6 +141,22 @@
 					$this->session->set_userdata('msg','Ubah profil berhasil');
 				}
 			}
+		}
+		//Get Pelamar
+		function pelamar($id){
+			$this->db->join('user','user.id_user=lamar.id_user');
+			$this->db->join('resume','resume.id_resume=lamar.id_user');
+			$this->db->join('lowongan','lowongan.id_lowongan=lamar.id_lowongan');
+			$this->db->where('lamar.id_lowongan',$id);
+			$result = $this->db->get('lamar')->result();
+			return $result;
+		}
+		//Detail Pelamar
+		function detailPelamar($id){
+			$this->db->join('attributte','attributte.id_attribute=user.id_kota');
+			$this->db->join('resume','resume.id_resume=user.id_user');
+			$this->db->where(array('id_user'=>$id,'role'=>'pelamar'));
+			return $this->db->get('user')->row();
 		}
 		//Lamar
 		function lamar(){

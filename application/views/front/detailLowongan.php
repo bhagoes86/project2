@@ -4,21 +4,6 @@
 <?php
 	foreach($get_lowongan['data'] as $row){
 ?>
-		<h3>Tentang Perusahaan</h3>
-		<blockquote>
-			<dl class="dl-horizontal">
-            <dt>Logo</dt>
-				<dd><img src='assets/logo/<?php echo $row->logo;?>' class='logo'/></dd>
-            <dt>Perushaan</dt>
-				<dd><h4><?php echo $row->perusahaan;?></h4></dd>
-            <dt>Tentang Perusahaan</dt>
-				<dd><?php echo $row->about;?></dd>
-            <dt>Alamat</dt>
-				<dd><?php echo $row->alamat;?></dd>
-          </dl>
-		</blockquote>
-		
-		<br>
 		<h3>Tentang Lowongan</h3>
 		<blockquote>
 			<dl class="dl-horizontal">
@@ -47,6 +32,34 @@
 			</form>
 <?php 	}	?>
           </dl>
+		</blockquote>
+		<br>
+		<h3>Pelamar Lowongan</h3>
+		<blockquote>
+			<table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nama Pelamar</th>
+                  <th>Data CV</th>
+                  <th>Detail</th>
+                </tr>
+              </thead>
+              <tbody>
+<?php
+		$i = 0;
+		foreach($get_pelamar as $row1){
+			$i++;
+			echo "<tr>
+				<td>$i</td>
+				<td>".$row1->fname." ".$row1->lname."</td>
+				<td><a href='assets/document/".$row1->cv."'><i class='icon-file'></i> ".$row1->cv."</a></td>
+				<td><a href='front/detailPelamar/".$row1->id_user."'>Detail</a></td>
+			</tr>";
+		}
+?>
+              </tbody>
+            </table>
 		</blockquote>
 	</div>
 <?php } ?>

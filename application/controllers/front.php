@@ -57,8 +57,29 @@ class front extends CI_Controller {
 	//Untuk Employer
 	public function employer(){
 		if($this->session->userdata('role')=='employer'){
-			$this->model_front->resume();
+		$data['get_lowongan'] = $this->model_front->get_lowongan();
 			$data['content'] = "front/employer";
+			$this->load->view('main',$data);
+		}else{
+			redirect();
+		}
+	}
+	public function detailLowongan(){
+		if($this->session->userdata('role')=='employer'){
+		$id = $this->uri->segment(3);
+		$data['get_lowongan'] = $this->model_front->get_lowongan();
+		$data['get_pelamar'] = $this->model_front->pelamar($id);
+			$data['content'] = "front/detailLowongan";
+			$this->load->view('main',$data);
+		}else{
+			redirect();
+		}
+	}
+	public function detailPelamar(){
+		if($this->session->userdata('role')=='employer'){
+			$id = $this->uri->segment(3);
+			$data['row'] = $this->model_front->detailPelamar($id);
+			$data['content'] = "front/detailPelamar";
 			$this->load->view('main',$data);
 		}else{
 			redirect();
@@ -74,11 +95,6 @@ class front extends CI_Controller {
 	{
 		$this->session->set_userdata('title',"Contact");
 		$data['content'] = "front/contact";
-		$this->load->view('main',$data);
-	}
-	public function register(){
-		$this->model_front->login();
-		$data['content'] = "front/register";
 		$this->load->view('main',$data);
 	}
 	public function login()
