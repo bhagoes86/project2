@@ -1,16 +1,51 @@
 <?php
 	class model_front extends CI_Model{
 	
+		//Register
+		function register(){
+			if($this->input->post('register')){
+				$this->form_validation->set_rules('user','Username','required');
+				$this->form_validation->set_rules('pass','Password','required');
+				$this->form_validation->set_rules('email','Email','required|valid_email');
+				$this->form_validation->set_rules('fname','First Name','required');
+				$this->form_validation->set_rules('lname','Last Name','required');
+				$this->form_validation->set_rules('kota','Kota','required');
+				$this->form_validation->set_rules('alamat','Alamat','required');
+				$this->form_validation->set_rules('telepon','Telepon','required');
+				if(!$this->form_validation->run()==false){
+					//Data
+					$data['username'] = $this->input->post('user');
+					$data['password'] = md5($this->input->post('pass'));
+					$data['email'] = $this->input->post('email');
+					$data['fname'] = $this->input->post('fname');
+					$data['lname'] = $this->input->post('lname');
+					$data['id_kota'] = $this->input->post('kota');
+					$data['alamat'] = $this->input->post('alamat');
+					$data['telp'] = $this->input->post('telepon');
+					$data['role'] = 'pelamar';
+					//Insert data
+					$this->session->set_userdata('msg','Register berhasil mari login <a href="front/Login">Login</a>');
+					$this->db->insert('user',$data);
+					unset($_POST);
+				}
+			}
+		}
 		//get Atributte
-		function sel_attributte($type){
+		function sel_attributte($type,$val=false){
 			$query = $this->db->get_where('attributte',array('type'=>$type))->result();
 			foreach($query as $row){
-				$tampil[$row->value] = $row->value;
+				$tampil[''] = "--Semua--";
+				if($val){
+					$tampil[$row->value] = $row->value;
+				}else{
+					$tampil[$row->id_attribute] = $row->value;
+				}
 			}
 			return $tampil;
 		}
 		//Get Lowongan
 		function get_lowongan($id=false){
+			$this->db->start_cache();
 			if($id){
 				$this->db->where('id_employer',$id);
 			}
@@ -19,12 +54,23 @@
 			//Search
 			if($this->input->post('search')){
 				$this->db->like(array('lowongan'=>$this->input->post('src'),
-					'value'=>$this->input->post('keahlian'),
+					'id_keahlian'=>$this->input->post('keahlian'),
 					'provinsi'=>$this->input->post('provinsi')));
 			}
-			$result['data'] = $this->db->get('lowongan')->result();
-			$result['count'] = $this->db->count_all_results('lowongan');
+			$this->db->from('lowongan');
+			$this->db->stop_cache();
+			
+			$result['data'] = $this->db->get()->result();
+			$result['count'] = $this->db->count_all_results();
+			$this->db->flush_cache();
 			return $result;
+		}
+		//Get lowongan by id
+		function getLowonganId($id){
+			$this->db->join('attributte','attributte.id_attribute=lowongan.id_keahlian');
+			$this->db->join('user','user.id_user=lowongan.id_employer');
+			$this->db->where('id_lowongan',$id);
+			return $this->db->get('lowongan')->result();
 		}
 		//Get Profil
 		function profil($role){
@@ -79,6 +125,55 @@
 						$this->session->set_userdata('msg','Simpan resume berhasil');
 					}
 					$this->session->unset_userdata('validation');
+			}
+		}
+		//Aksi CRUD lowongan
+		function lowonganAksi(){
+			//tambah lowongan
+			if($this->input->post('createLowongan')){
+				$this->form_validation->set_rules('lowongan','Lowongan','required');
+				$this->form_validation->set_rules('deskripsi','Deskripsi','required');
+				$this->form_validation->set_rules('provinsi','Provinsi','required');
+				$this->form_validation->set_rules('kategori','Kategori','required');
+				if(!$this->form_validation->run()==FALSE){
+					//Buat data
+					$data['id_employer'] = $this->session->userdata('id_user');
+					$data['lowongan'] = $this->input->post('lowongan');
+					$data['deskripsi'] = $this->input->post('deskripsi');
+					$data['provinsi'] = $this->input->post('provinsi');
+					$data['id_keahlian'] = $this->input->post('kategori');
+					$data['tanggal'] = date('d-m-Y');
+					$data['status'] = 1;
+					//Insert data
+					$this->db->insert('lowongan',$data);
+					$this->session->set_userdata('msg','Buat Lowongan berhasil <a href="front/formLowongan">lihat</a>');
+				}
+			}
+			//Edit Lowongan
+			if($this->input->post('editLowongan')){
+				$this->form_validation->set_rules('lowongan','Lowongan','required');
+				$this->form_validation->set_rules('deskripsi','Deskripsi','required');
+				$this->form_validation->set_rules('provinsi','Provinsi','required');
+				$this->form_validation->set_rules('kategori','Kategori','required');
+				if(!$this->form_validation->run()==FALSE){
+					//Buat data
+					$data['lowongan'] = $this->input->post('lowongan');
+					$data['deskripsi'] = $this->input->post('deskripsi');
+					$data['provinsi'] = $this->input->post('provinsi');
+					$data['id_keahlian'] = $this->input->post('kategori');
+					$data['tanggal'] = date('d-m-Y');
+					$data['status'] = 1;
+					//Insert data
+					$this->db->where('id_lowongan',$this->input->post('id_lowongan'));
+					$this->db->update('lowongan',$data);
+					$this->session->set_userdata('msg','Edit Lowongan berhasil <a href="front/formLowongan">lihat</a>');
+				}
+			}
+			//Delete Lowongan
+			if($this->input->post('deleteLowongan')){
+				$this->db->where('id_lowongan',$this->input->post('deleteLowongan'));
+				$this->db->delete('lowongan');
+				$this->session->set_userdata('msg','Delete Lowongan berhasil');
 			}
 		}
 		//Edit Profil employer
@@ -147,7 +242,8 @@
 			$this->db->join('user','user.id_user=lamar.id_user');
 			$this->db->join('resume','resume.id_resume=lamar.id_user');
 			$this->db->join('lowongan','lowongan.id_lowongan=lamar.id_lowongan');
-			$this->db->where('lamar.id_lowongan',$id);
+			$this->db->join('attributte','attributte.id_attribute=lowongan.id_keahlian');
+			$this->db->where('lowongan.id_lowongan',$id);
 			$result = $this->db->get('lamar')->result();
 			return $result;
 		}
@@ -164,7 +260,7 @@
 			if($this->input->post('lamar')){
 				//Cek Upload CV
 				$row = $this->db->get_where('resume',array('id_resume'=>$this->session->userdata('id_user')))->row();
-				if($row->cv){
+				if($row&&$row->cv){
 					$data = array('id_lowongan'=>$this->input->post('id_lowongan'),
 								'id_user'=>$this->session->userdata('id_user'),
 								'status'=>0);

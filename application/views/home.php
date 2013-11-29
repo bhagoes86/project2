@@ -3,15 +3,15 @@
 	<div class='container'><div class='row-fluid'>
 	<!--Table Search Lowongan-->
 	  <div class='span3'>
-		<form action='<?php echo base_url();?>front/lowongan' >
+		<form method='post' action='<?php echo base_url();?>front/lowongan' >
 		<h3>Cari Lowongan :</h3>
 		<div class="control-group">
 		  <label class="control-label" for="inputProvinsi">Provinsi</label>
 		  <div class="controls">
 			<?php 
-				$sel_provinsi = $this->model_front->sel_attributte('provinsi');
+				$sel_provinsi = $this->model_front->sel_attributte('provinsi',true);
 				$style = "class='span12'";
-				echo form_dropdown("provinsi",$sel_provinsi,"",$style);
+				echo form_dropdown("provinsi",$sel_provinsi,$this->input->post('provinsi'),$style);
 			?>
 		  </div>
         </div>
@@ -21,7 +21,7 @@
 			<?php 
 				$sel_keahlian = $this->model_front->sel_attributte('keahlian');
 				$style = "class='span12'";
-				echo form_dropdown("keahlian",$sel_keahlian,"",$style);
+				echo form_dropdown("keahlian",$sel_keahlian,$this->input->post('keahlian'),$style);
 			?>
 		  </div>
         </div>
@@ -45,21 +45,21 @@
 			</ol>
 			<div class="carousel-inner">
 			  <div class="item active">
-				<img src="assets/img/bootstrap-mdo-sfmoma-01.jpg" alt="">
+				<img src="assets/img/slide1.jpg" alt="">
 				<div class="carousel-caption">
 				  <h4>First Thumbnail label</h4>
 				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
 				</div>
 			  </div>
 			  <div class="item">
-				<img src="assets/img/bootstrap-mdo-sfmoma-02.jpg" alt="">
+				<img src="assets/img/slide2.jpg" alt="">
 				<div class="carousel-caption">
 				  <h4>Second Thumbnail label</h4>
 				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
 				</div>
 			  </div>
 			  <div class="item">
-				<img src="assets/img/bootstrap-mdo-sfmoma-03.jpg" alt="">
+				<img src="assets/img/slide3.jpg" alt="">
 				<div class="carousel-caption">
 				  <h4>Third Thumbnail label</h4>
 				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>

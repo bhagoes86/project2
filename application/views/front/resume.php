@@ -3,6 +3,10 @@
 	<div class="span9">
 <?php
 	$row = $this->db->get_where('resume',array('id_resume'=>$this->session->userdata('id_user')))->row();
+	if(!$row){
+		$this->db->insert('resume',array('id_resume'=>$this->session->userdata('id_user')));
+		redirect('front/resume');
+	}
 	if($this->input->post('edit')){
 		foreach($_POST as $key => $val){
 			$get[$key] = $val;
@@ -66,7 +70,9 @@
 	<div class="control-group">
 	  <label class="control-label">Jenis Kelamin</label>
 	  <div class="controls">
-		<input type="text" name="jenis_kelamin" value="<?php echo $get['jenis_kelamin'];?>" placeholder="Jenis Kelamin">
+		<?php 
+			$data = array('Laki-Laki'=>'Laki-Laki','Perempuan'=>'Perempuan');
+			echo form_dropdown('jenis_kelamin',$data,$get['jenis_kelamin']);?>
 		<?php echo form_error('jenis_kelamin');?>
 	  </div>
 	</div>

@@ -6,7 +6,7 @@
 	</ul>
 <?php
 	if(empty($get_lowongan['data'])){
-		echo "<h3>Lowongan Tidak ditemukan</h3>";
+		echo "<h3>Tidak ada Lowongan ataupun Pelamar</h3>";
 	}else{
 ?>
 	<table class="list-lowongan table">

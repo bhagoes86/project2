@@ -3,7 +3,7 @@
 		<div class="page-header">
 		  <h3>Register user</h3>
 		</div>
-	<?php echo $this->model_front->getMsg('msg','error');?>
+	<?php echo $this->model_front->getMsg('msg','success');?>
 	<div class="control-group">
 	  <label class="control-label">Username</label>
 	  <div class="controls">
@@ -22,7 +22,7 @@
 	  <label class="control-label">Email</label>
 	  <div class="controls">
 		<input type="text" name="email" value="<?php echo set_value('email');?>" placeholder="Email">
-		<?php echo form_error('pass');?>
+		<?php echo form_error('email');?>
 	  </div>
 	</div>
 		<div class="control-group">
@@ -42,9 +42,10 @@
 		<div class="control-group">
 	  <label class="control-label">Kota</label>
 	  <div class="controls">
-	<select name="kota">
-	<option value="">Belum Ada Kota</option>
-	</select>
+	<?php
+		$sel_kota = $this->model_front->sel_attributte('kota');
+		echo form_dropdown('kota',$sel_kota,set_value('kota'));
+	?>
 		<?php echo form_error('kota');?>
 	  </div>
 	</div>
@@ -64,7 +65,7 @@
 	</div>
 	<div class="control-group">
 	  <div class="controls">
-		<input type="submit" class="btn" name="login" value="Sign in">
+		<input type="submit" class="btn btn-primary" name="register" value="Register">
 	  </div>
 	</div>
   </form>

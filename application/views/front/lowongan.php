@@ -30,7 +30,7 @@
 					  <td><img class='logo' src='assets/logo/".$row->logo."'/></td>
 					  <td><h4>".$row->lowongan."</h4></td>
 					  <td>".$row->provinsi."</td>
-					  <td><a href='front/lamar/".$row->id_user."' type='button' class='btn btn-info'>Detail</a></td>
+					  <td><a href='front/lamar/".$row->id_lowongan."' type='button' class='btn btn-info'>Detail</a></td>
 					</tr>
 				";
 			}

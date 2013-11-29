@@ -25,7 +25,7 @@ class front extends CI_Controller {
 	public function lamar()
 	{
 		$id = $this->uri->segment(3);
-		$data['get_lowongan'] = $this->model_front->get_lowongan($id);
+		$data['get_lowongan'] = $this->model_front->getLowonganId($id);
 		$this->model_front->lamar();
 		$data['content'] = "front/lamar";
 		$this->load->view('main',$data);
@@ -57,8 +57,21 @@ class front extends CI_Controller {
 	//Untuk Employer
 	public function employer(){
 		if($this->session->userdata('role')=='employer'){
-		$data['get_lowongan'] = $this->model_front->get_lowongan();
+		$id = $this->session->userdata('id_user');
+		$data['get_lowongan'] = $this->model_front->get_lowongan($id);
 			$data['content'] = "front/employer";
+			$this->load->view('main',$data);
+		}else{
+			redirect();
+		}
+	}
+	//Form Lowongan
+	public function formLowongan(){
+		if($this->session->userdata('role')=='employer'){
+			$this->model_front->lowonganAksi();
+			$id = $this->session->userdata('id_user');
+			$data['get_lowongan'] = $this->model_front->get_lowongan($id);
+			$data['content'] = "front/formLowongan";
 			$this->load->view('main',$data);
 		}else{
 			redirect();
@@ -67,10 +80,9 @@ class front extends CI_Controller {
 	public function detailLowongan(){
 		if($this->session->userdata('role')=='employer'){
 		$id = $this->uri->segment(3);
-		$data['get_lowongan'] = $this->model_front->get_lowongan();
 		$data['get_pelamar'] = $this->model_front->pelamar($id);
-			$data['content'] = "front/detailLowongan";
-			$this->load->view('main',$data);
+		$data['content'] = "front/detailLowongan";
+		$this->load->view('main',$data);
 		}else{
 			redirect();
 		}
@@ -95,6 +107,11 @@ class front extends CI_Controller {
 	{
 		$this->session->set_userdata('title',"Contact");
 		$data['content'] = "front/contact";
+		$this->load->view('main',$data);
+	}
+	public function register(){
+		$this->model_front->register();
+		$data['content'] = "front/register";
 		$this->load->view('main',$data);
 	}
 	public function login()

@@ -2,7 +2,7 @@
 	<?php $this->load->view('part/fmenukiri.php');?>
 	<div class="span9">
 <?php
-	foreach($get_lowongan['data'] as $row){
+	foreach($get_lowongan as $row){
 ?>
 		<h3>Tentang Perusahaan</h3>
 		<blockquote>

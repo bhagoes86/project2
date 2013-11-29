@@ -28,8 +28,7 @@
 
           <div class="nav-collapse collapse">
             <ul class="nav">
-
-
+			<li><a href="#">View Front</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
                 <ul class="dropdown-menu">

@@ -7,6 +7,9 @@ class job extends CI_Controller {
 		$this->load->model('modeljob');
 		$this->form_validation->set_message('required','Data %s Harus Diisi');
 		$this->form_validation->set_message('valid_email','%s Harus Benar');
+		if(!$this->session->userdata('role')=='admin'){
+			redirect();
+		}
 	}
 //____________________________Pelamar____________________________________________	
 public function userPelamar()

@@ -5,9 +5,9 @@
 		  <label class="control-label" for="inputProvinsi">Provinsi</label>
 		  <div class="controls">
 			<?php 
-				$sel_provinsi = $this->model_front->sel_attributte('provinsi');
+				$sel_provinsi = $this->model_front->sel_attributte('provinsi',true);
 				$style = "class='span12'";
-				echo form_dropdown("provinsi",$sel_provinsi,"",$style);
+				echo form_dropdown("provinsi",$sel_provinsi,$this->input->post('provinsi'),$style);
 			?>
 		  </div>
         </div>
@@ -17,14 +17,14 @@
 			<?php 
 				$sel_keahlian = $this->model_front->sel_attributte('keahlian');
 				$style = "class='span12'";
-				echo form_dropdown("keahlian",$sel_keahlian,"",$style);
+				echo form_dropdown("keahlian",$sel_keahlian,$this->input->post('keahlian'),$style);
 			?>
 		  </div>
         </div>
 		<div class="control-group">
 		  <label class="control-label" for="inputsrc">Cari</label>
 		  <div class="controls">
-			<input class='span12' name='src' type="text" id="inputsrc" placeholder="Cari Lowongan">
+			<input class='span12' name='src' type="text" id="inputsrc" placeholder="Cari Lowongan" />
 		  </div>
 		  <div class="controls">
 			<input type="submit" name='search' value='Search' class="btn span12" />
@@ -42,7 +42,7 @@
 			}
 			if($this->session->userdata('role')=='employer'){
 				$menu['Pelamar'] = "front/employer";
-				$menu['Buat Lowongan'] = "front/formLowongan";
+				$menu['Lowongan Saya'] = "front/formLowongan";
 			}
 		}
 		foreach($menu as $menu => $halaman){
