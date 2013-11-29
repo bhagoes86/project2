@@ -1,7 +1,7 @@
 <div class="row-fluid">
 	<?php $this->load->view('part/fmenukiri.php');?>
 	<div class="span9">
-		<h3>Tentang Lowongan</h3>
+		<h3>Tentang Pelamar</h3>
 		<blockquote>
 			<dl class="dl-horizontal">
             <dt>Nama Lengkap</dt>
