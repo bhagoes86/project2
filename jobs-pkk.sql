@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2013 at 02:21 AM
+-- Generation Time: Feb 07, 2014 at 08:11 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -175,8 +175,8 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `email`, `fname`, `lname`
 (23, 'andry', 'd41d8cd98f00b204e9800998ecf8427e', 'andry@gmail.com', 'Andry Kurniawan', '0', 'Future Job', '<p>\r\n	<span style="color: rgb(0, 0, 0); font-family: helvetica, arial, ''century ghotic''; font-size: 16px; line-height: 25px; background-color: rgb(249, 249, 249);">Future Jobs Online adalah website yang menyediakan lowongan kerja terbanyak dan paling berkualitas. Dan dengan menjelajahi website Future Jobs, pasti kamu akan dapat lowongan yang tepat bagi kamu!!</span></p>\r\n', '1385034656-logo.png', 3, 'Jln.Sudirman', '085921204627', '', 'employer'),
 (24, 'Rochim', '867b1e1c3f22c04eda798c2e622748b7', 'rochim@gmail.com', 'Zainu Rochim', '0', 'Future Leaf', '<p>\r\n	<span style="color: rgb(0, 0, 0); font-family: helvetica, arial, ''century ghotic''; font-size: 16px; line-height: 25px;">Future Jobs Online adalah website yang menyediakan lowongan kerja terbanyak dan paling berkualitas. Dan dengan menjelajahi website Future Jobs, pasti kamu akan dapat lowongan yang tepat bagi kamu!!</span></p>\r\n', '1385017682-logoc.png', 3, 'Jln.Sudirman', '085921204627', '', 'employer'),
 (27, 'admin', '21232f297a57a5a743894a0e4a801fc3', '', '', '', '', '', '', 3, '', '', '', 'admin'),
-(28, 'rochim.eiji', '15b1448de92c2729154d11b3c917b0bd', 'rochim.eiji@yahoo.comm', 'Rochim EIji', '0', 'Future Leaf', 'FUture leaf adalah perushaan yang bekerja dibidang tehnologi informasi', '1385088795_friend.jpg', 3, 'Cioma Bukit ASri Block C 20 No 10', '085777909254', '', 'employer'),
-(29, 'kandidat', '202cb962ac59075b964b07152d234b70', 'kandidat@yahoo.com', 'kandidat', 'pertama', '', '', '', 2, 'Bukit asri', '085723652', '', 'pelamar'),
+(28, 'employer', 'edc6771263c556025a73b1bc33861a5a', 'rochim.eiji@yahoo.comm', 'Rochim EIji', '0', 'Future Leaf', 'FUture leaf adalah perushaan yang bekerja dibidang tehnologi informasi', '1385088795_friend.jpg', 3, 'Cioma Bukit ASri Block C 20 No 10', '085777909254', '', 'employer'),
+(29, 'kandidat', 'a94994c1f9d6c72599542b12d771d1bc', 'kandidat@yahoo.com', 'kandidat', 'pertama', '', '', '', 2, 'Bukit asri', '085723652', '', 'pelamar'),
 (30, 'b', '92eb5ffee6ae2fec3ad71c777531578f', 'b@yho.com', 'b', 'b', '', '', '', 2, 'b', 'rt', '', 'pelamar');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
